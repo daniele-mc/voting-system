@@ -1,10 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Booth from "./Booth";
 import Result from "./Result";
+import PropTypes from 'prop-types';
 
 function VotingCard(props) {
   const [mode, setMode] = useState(props.state);
   const options = props.votes.map((vote) => vote.option);
+
+  useEffect(() => {
+    setMode(props.state)
+  },[props.state])
 
   const endVotation = () => {
     setMode("close");

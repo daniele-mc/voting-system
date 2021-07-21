@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 function Result(props) {
   const calcPercentual = (number) => {
