@@ -5,14 +5,17 @@
       class="m5"
       :key="option"
       @click="$emit('select', index)"
-    >{{ option }}</button>
+    >
+      {{ option }}
+    </button>
   </div>
 </template>
 
 <script>
 export default {
-  props: ['options']
-}
+  name: "Booth",
+  props: ["options"],
+};
 </script>
 
 <style>
