@@ -9,6 +9,7 @@ import { Component, Input } from '@angular/core';
       <br />
       {{ vote.count }} votes ( {{ calcPercentual(vote.count) }} %)
     </p>
+    
   `,
 })
 export class ResultComponent {

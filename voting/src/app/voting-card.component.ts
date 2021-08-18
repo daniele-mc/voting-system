@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-
 @Component({
   selector: 'voting-card',
   template: `
@@ -38,14 +37,9 @@ import { Component, Input } from '@angular/core';
   ],
 })
 export class VotingCardComponent {
-  @Input() title: string | undefined;
-
-  @Input() votes!: Array<{ option: string; count: number }>;
-    // votes = [
-    //   { option: 'Sim', count: 6 },
-    //   { option: 'Nao', count: 3 },
-    // ];
   state = 'open';
+  @Input() title: string | undefined;
+  @Input() votes!: Array<{ option: string; count: number }>;
 
   endVotation() {
     this.state = 'close';
@@ -56,6 +50,6 @@ export class VotingCardComponent {
   }
 
   public get options(): string[] {
-    return this.votes.map((vote) => vote.option);;
+    return this.votes.map((vote) => vote.option);
   }
 }
