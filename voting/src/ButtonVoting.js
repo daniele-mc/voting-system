@@ -4,7 +4,6 @@ import React from "react";
 function ButtonVoting(props) {
   const colorButton = props.color ? props.color : "primary";
   const variantButton = props.variant ? props.variant : "contained";
-//   const colorText = props.color === "secondary" ? "black" : "white";
   return (
     <Button
       style={{ ...props.style }}
