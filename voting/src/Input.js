@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { TextField } from "@material-ui/core";
 
@@ -41,17 +41,34 @@ function Input({
   placeholder,
   value,
   isRequired,
-  onChange
+  onChange,
+  minLength,
 }) {
   const commonProps = {
     placeholder,
     value,
-    required: isRequired,
-    onChange
+    onChange,
   };
-    const classes = useStyles();
+  const classes = useStyles();
+  const [validateError, setValidateError] = useState(false);
+  const [messageError, setMessageError] = useState("");
+
+  const validateInput = (e) => {
+    const text = e.target.value;
+    if (!text && isRequired === true) {
+      setValidateError(true);
+      setMessageError("Esse campo é obrigatórioooo");
+    } else if (text.length < minLength) {
+      setValidateError(true);
+      setMessageError(`Este campo requer pelo menos ${minLength} caracteres`);
+    } else {
+      setValidateError(false);
+      setMessageError("");
+    }
+  };
+
   return (
-    <div className="form-item" style={{ paddingRight: 20, paddingLeft: 20 }}>
+    <div className="form-item">
       <Label label={label} isRequired={isRequired} />
       <div>
         {
@@ -61,6 +78,10 @@ function Input({
                 variant="outlined"
                 className={classes.root}
                 fullWidth
+                required={isRequired}
+                onBlur={validateInput}
+                error={validateError}
+                helperText={validateError ? messageError : " "}
                 {...commonProps}
               />
             ),
@@ -68,16 +89,18 @@ function Input({
               <TextField
                 multiline={true}
                 rows={4}
-                inputComponent="textarea"
                 variant="outlined"
                 className={classes.root}
                 fullWidth
+                required={isRequired}
+                onBlur={validateInput}
+                error={validateError}
+                helperText={validateError ? messageError : " "}
                 {...commonProps}
               />
             ),
           }[type || "input"]
         }
-        {/* <Error touched={touched[name]} error={errors[name]} /> */}
       </div>
     </div>
   );

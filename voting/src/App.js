@@ -1,17 +1,29 @@
-
 import "./App.css";
-import VotingCard from "./VotingCard";
+import VotingList from "./VotingList";
+import { ThemeProvider, createTheme } from "@material-ui/core";
 
 function App() {
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: "#DF73FF",
+      },
+      secondary: {
+        main: "#d5badd",
+      },
+    },
+  });
   const votes = [
     { option: "Sim", count: 3 },
     { option: "Nao", count: 0 },
   ];
 
   return (
-    <div>
-      <VotingCard title="amanha" state="open" votes={votes} />
-    </div>
+    <ThemeProvider theme={theme}>
+      <div>
+        <VotingList />
+      </div>
+    </ThemeProvider>
   );
 }
 

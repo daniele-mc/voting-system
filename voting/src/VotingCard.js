@@ -8,6 +8,7 @@ function VotingCard(props) {
   const options = props.votes.map((vote) => vote.option);
 
   useEffect(() => {
+      console.log('props:', props)
     setMode(props.state)
   },[props.state])
 
