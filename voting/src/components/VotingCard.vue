@@ -3,7 +3,7 @@
     <div v-if="state === 'open'">
       <div class="panel question">
         <p class="m5">{{ title }}</p>
-        <Booth :options="options" @select="select" />
+        <Booth :options="optionsVoting" @select="select" />
       </div>
       <button v-on:click="endVotation" class="submitBtn">
         Encerrar votacao
@@ -11,7 +11,7 @@
     </div>
     <div v-else>
       <div class="panel results">
-        <Result :votes="votes" />
+        <Result :votes="optionsMutable" />
       </div>
     </div>
   </div>
@@ -21,26 +21,26 @@
 import Booth from "./Booth";
 import Result from "./Result";
 
-let options = [];
 
 export default {
   components: { Booth, Result },
-  props: ['title', 'votes', 'state'],
+  props: ["title", "options"],
+ data() {
+    return {
+      state: 'open',
+      optionsVoting: this.options.map((vote) => vote.option),
+      optionsMutable: this.options
+    }
+  },
   methods: {
     endVotation() {
       this.state = "close";
     },
 
     select(index) {
-      this.votes[index].count++;
+      this.optionsMutable[index].count++;
     },
-  },
-  computed: {
-    options() {
-      options = this.votes.map((vote) => vote.option);
-      return options;
-    },
-  },
+  }
 };
 </script>
 
